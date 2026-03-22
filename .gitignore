@@ -1,0 +1,67 @@
+### VS Code ###
+.vscode/
+*.code-workspace
+
+### Python / ML Environments ###
+venv/
+env/
+.env
+bin/
+lib/
+develop-eggs/
+dist/
+eggs/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+### Jupyter Notebooks ###
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+# Keep notebooks, but ignore the large auto-generated data within them if needed
+# (Optional: use tools like nbstripout instead)
+
+### Machine Learning Artifacts (Large Files) ###
+# Ignore large data files
+data/
+*.csv
+*.parquet
+*.jsonl
+*.h5
+*.npy
+*.npz
+
+# Ignore model weights and checkpoints
+models/
+*.pt
+*.pth
+*.onnx
+*.pb
+*.ckpt
+*.joblib
+*.pickle
+*.pkl
+
+### Logs and Tracking ###
+logs/
+*.log
+mlruns/
+lightning_logs/
+wandb/
+.tensorboard/
+
+### OS / System ###
+.DS_Store
+Thumbs.db
+
+### Cache ###
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
