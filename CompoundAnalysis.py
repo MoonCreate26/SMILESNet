@@ -66,8 +66,8 @@ def try_predict(user_input):
         print(f"\nInvalid SMILES: {user_input}")
 
     else:
-        arr = fp_to_array(get_fp(smile))
-        print(model.predict([arr]))
+        fp = get_fp(smile)
+        print(model.predict([fp]))
 
     try_predict(input("\nEnter SMILES to analyze or '0' to exit: "))
 
