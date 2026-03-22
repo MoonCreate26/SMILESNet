@@ -27,7 +27,7 @@ def fp_to_array(fp):
     DataStructs.ConvertToNumpyArray(fp, arr)
     return arr
 
-df['fingerprint'] = df['SMILES'].apply(lambda x: Chem.MolFromSmiles(x)).apply(get_fp)#.apply(lambda x: fp_to_array(x) if x else None)
+df['fingerprint'] = df['SMILES'].apply(lambda x: Chem.MolFromSmiles(x)).apply(get_fp)
 
 # Set input and output
 x = np.stack(df['fingerprint'].values)
@@ -36,7 +36,6 @@ y = df['logP'].to_numpy()
 print(f"Input: Fingerprint\n{x}\n")
 print(f"Output: logP\n{y}\n")
 
-print(x.dtype)
 # Split Data
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
@@ -55,3 +54,21 @@ r2 = r2_score(y_test, predictions)
 
 print(f"Mean Squared Error: {mse:.4f}")
 print(f"R^2 Score: {r2:.4f}")
+
+def try_predict(user_input):
+    if user_input == "0":
+        print("\nTerminating Program.")
+        return
+    
+    smile = Chem.MolFromSmiles(user_input)
+
+    if smile == None:
+        print(f"\nInvalid SMILES: {user_input}")
+
+    else:
+        arr = fp_to_array(get_fp(smile))
+        print(model.predict([arr]))
+
+    try_predict(input("\nEnter SMILES to analyze or '0' to exit: "))
+
+try_predict(input("\nEnter SMILES to analyze or '0' to exit: "))
