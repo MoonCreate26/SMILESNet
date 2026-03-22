@@ -19,7 +19,7 @@ fp_gen = rdFingerprintGenerator.GetMorganGenerator(radius=2, fpSize=2048)
 
 def get_fp(mol):
     if mol:
-        return fp_gen.GetFingerprint(mol)
+        return fp_gen.GetFingerprintAsNumPy(mol)
     return None
 
 def fp_to_array(fp):
@@ -27,11 +27,31 @@ def fp_to_array(fp):
     DataStructs.ConvertToNumpyArray(fp, arr)
     return arr
 
-df['fingerprint'] = df['SMILES'].apply(lambda x: Chem.MolFromSmiles(x)).apply(get_fp).apply(lambda x: fp_to_array(x) if x else None)
+df['fingerprint'] = df['SMILES'].apply(lambda x: Chem.MolFromSmiles(x)).apply(get_fp)#.apply(lambda x: fp_to_array(x) if x else None)
 
 # Set input and output
-x = df['fingerprint']
-y = df['logP']
+x = np.stack(df['fingerprint'].values)
+y = df['logP'].to_numpy()
 
 print(f"Input: Fingerprint\n{x}\n")
-print(f"Output: logP\n{y}")
+print(f"Output: logP\n{y}\n")
+
+print(x.dtype)
+# Split Data
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+# Define Model
+model = RandomForestRegressor(n_estimators=100, max_depth=None, n_jobs=-1, random_state=42)
+
+# Train
+model.fit(x_train, y_train)
+
+# Predictions
+predictions = model.predict(x_test)
+
+# Evaluation
+mse = mean_squared_error(y_test, predictions)
+r2 = r2_score(y_test, predictions)
+
+print(f"Mean Squared Error: {mse:.4f}")
+print(f"R^2 Score: {r2:.4f}")
