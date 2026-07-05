@@ -7,12 +7,12 @@ SMILES is a string representation of chemical compounds. The purpose of this pro
 # Example
 For getting the SMILES string of compound, I recomment using [this website](https://www.cheminfo.org/flavor/malaria/Utilities/SMILES_generator___checker/index.html), which allows you to interactively build molecules.
 
-Analysis of Benzaldehyde:
+Analysis of Benzaldehyde:\
 ![Benzaldehyde](.github/Benzaldehyde.png)
 For many compounds, the prediction is relatively accurage. For instance, according to [National Library of Medicine](https://pubchem.ncbi.nlm.nih.gov/compound/240#section=Depositor-Supplied-Synonyms), the logP of Benzealdehyde is 1.5, which is very close to the predicted value of ~1.54 (meaning Benzaldehyde is hydrophilic).
 
 However, for compounds with negative logP value, the prediction diverge from actual values.
 
-Analysis of Acetone:
+Analysis of Acetone:\
 ![Acetone](.github/Acetone.png)
 Notice how the predicted value is significantly different from the [real value](https://pubchem.ncbi.nlm.nih.gov/compound/Acetone) of -0.1. This is likely due to the dataset's lack of extremely hydrophilic compounds (with logP < 0). This can likely be improved by changing the ML model to one that actually analyze the compound itself using 2D map like [this](https://pubs.acs.org/doi/10.1021/acs.jpclett.2c01913), but is beyond the scope of this project, which is only intended to be a simple prototype.
