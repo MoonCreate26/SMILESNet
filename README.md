@@ -9,7 +9,7 @@ For getting the SMILES string of compound, I recomment using [this website](http
 
 Analysis of Benzaldehyde:\
 ![Benzaldehyde](.github/Benzaldehyde.png)
-For many compounds, the prediction is relatively accurage. For instance, according to [National Library of Medicine](https://pubchem.ncbi.nlm.nih.gov/compound/240#section=Depositor-Supplied-Synonyms), the logP of Benzealdehyde is 1.5, which is very close to the predicted value of ~1.54 (meaning Benzaldehyde is hydrophilic).
+For many compounds, the prediction is relatively accurate. For instance, according to [National Library of Medicine](https://pubchem.ncbi.nlm.nih.gov/compound/240#section=Depositor-Supplied-Synonyms), the logP of Benzealdehyde is 1.5, which is very close to the predicted value of ~1.54 (meaning Benzaldehyde is hydrophilic).
 
 However, for compounds with negative logP value, the prediction diverge from actual values.
 
